@@ -3,7 +3,9 @@ import { StyleSheet, Text, View, Button } from "react-native";
 function ProfileScreen(props) {
   return (
     <View style={styles.viewStyle}>
-      <Text style={styles.textStyle}> {props.route.params.name} </Text>
+      <Text style={styles.textStyle}>
+        {props.route?.params?.name ?? "No name passed"}
+      </Text>
       <Button title="User" onPress={() => props.navigation.navigate("User")} />
     </View>
   );
