@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import styles from "./styles";
 import InfoRow from "../components/InfoRow";
+import Toast from "react-native-toast-message";
 
 function HomeScreen() {
   const navigation = useNavigation();
@@ -33,6 +34,15 @@ function HomeScreen() {
     }
 
     getData();
+
+    setTimeout(() => {
+      Toast.show({
+        type: "success",
+        text1: "Welcome!",
+        text2: "How are ya",
+        visibilityTime: 5000,
+      });
+    }, 2000);
   }, []);
 
   return (

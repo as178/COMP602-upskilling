@@ -22,6 +22,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import axios from "axios";
+import Toast from "react-native-toast-message";
 
 function RegisterPage() {
   const [name, setName] = useState(""); //store the value in input field
@@ -61,7 +62,12 @@ function RegisterPage() {
         })
         .catch((e) => console.log(e));
     } else {
-      Alert.alert("Please fill in the mandatory fields.");
+      Toast.show({
+        type: "error",
+        text1: "Oops!",
+        text2: "Please fill in the mandatory fields.",
+        visibilityTime: 5000,
+      });
     }
   }
 
