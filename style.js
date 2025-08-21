@@ -132,6 +132,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#35345aff',
     },
+    errorText: {
+        marginLeft: 20,
+        color: "red"
+    },
     padding: {
         padding: 15
     },
