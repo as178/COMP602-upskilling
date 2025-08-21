@@ -6,8 +6,9 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  Alert,
 } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faCircleCheck,
@@ -20,6 +21,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import axios from "axios";
 
 function RegisterPage() {
   const [name, setName] = useState(""); //store the value in input field
@@ -31,6 +33,37 @@ function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [mobile, setMobile] = useState(""); //store the value in input field
   const [mobileVerify, setMobileVerify] = useState(false); //verify whether value is ok
+
+  const navigation = useNavigation();
+
+  function handleSubmit() {
+    const userData = {
+      name,
+      email,
+      mobile,
+      password,
+    };
+
+    const API_URL = process.env.EXPO_PUBLIC_API_URL;
+
+    if (nameVerify && emailVerify && mobileVerify && passwordVerify) {
+      axios
+        .post(`${API_URL}/register`, userData)
+        .then((res) => {
+          console.log(res.data);
+
+          if (res.data.status == "ok") {
+            Alert.alert("registered successfully!!");
+            navigation.navigate("Login");
+          } else {
+            Alert.alert(JSON.stringify(res.data));
+          }
+        })
+        .catch((e) => console.log(e));
+    } else {
+      Alert.alert("Please fill in the mandatory fields.");
+    }
+  }
 
   function handleName(e) {
     const nameVar = e.nativeEvent.text;
@@ -76,7 +109,7 @@ function RegisterPage() {
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
       showsVerticalScrollIndicator={false}
-      keyboardShouldPersistTaps={true}
+      keyboardShouldPersistTaps="always"
     >
       <View style={styles.mainContainer}>
         <View style={styles.logoContainer}>
@@ -221,7 +254,10 @@ function RegisterPage() {
           )}
 
           <View style={styles.button}>
-            <TouchableOpacity style={styles.inBut}>
+            <TouchableOpacity
+              style={styles.inBut}
+              onPress={() => handleSubmit()}
+            >
               <View>
                 <Text style={styles.textSign}>Register</Text>
               </View>

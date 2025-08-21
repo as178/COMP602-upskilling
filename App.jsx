@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import HomeScreen from "./screens/HomeScreen";
+import HomeScreen from "./screens/HomeScreen.jsx";
 import ProfileScreen from "./screens/ProfileScreen";
 import UserScreen from "./screens/UserScreen";
 import {
