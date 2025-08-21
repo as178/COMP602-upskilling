@@ -31,6 +31,7 @@ function LoginPage() {
         if (res.data.status == "ok") {
           Alert.alert("Logged in!");
           AsyncStorage.setItem("token", res.data.data);
+          AsyncStorage.setItem("isLoggedIn", "true");
           navigation.navigate("Home");
         }
       })
