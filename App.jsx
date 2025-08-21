@@ -11,6 +11,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/Entypo";
 import DrawerContent from "./DrawerContent";
+import LoginPage from "./screens/Login&Register/Login";
+import RegisterPage from "./screens/Login&Register/Register";
+import { useEffect } from "react";
 
 const StackNav = () => {
   const Stack = createNativeStackNavigator();
@@ -65,9 +68,17 @@ const DrawerNav = () => {
 };
 
 function App() {
+  const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <DrawerNav />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="Register" component={RegisterPage} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
