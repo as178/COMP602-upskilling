@@ -13,7 +13,6 @@ import Icon from "react-native-vector-icons/Entypo";
 import DrawerContent from "./DrawerContent";
 import LoginPage from "./screens/Login&Register/Login";
 import RegisterPage from "./screens/Login&Register/Register";
-import { useEffect } from "react";
 
 const StackNav = () => {
   const Stack = createNativeStackNavigator();
@@ -42,7 +41,11 @@ const StackNav = () => {
         },
       }}
     >
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen
         name="User"
@@ -78,6 +81,7 @@ function App() {
       >
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Register" component={RegisterPage} />
+        <Stack.Screen name="Home" component={DrawerNav} />
       </Stack.Navigator>
     </NavigationContainer>
   );
